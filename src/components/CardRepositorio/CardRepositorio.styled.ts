@@ -12,6 +12,7 @@ export const CardContainer = styled.section`
         padding: 19px 14px;
         border-radius: 10px;
         color: white;
+
         .icone{
             font-size: 2rem;
             width: 250px;

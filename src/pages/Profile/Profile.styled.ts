@@ -4,17 +4,27 @@ export const Section = styled.section`
     max-width: 1000px;
     margin: 148px auto;
     color: white;
-    /* background-color: red; */
 
     .container{
         max-width:580px ;
         margin: 0 auto;
+
+        @media (max-width: 768px){
+                max-width: 420px;
+            }
+        
 
         .nameUser{
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
+
+
+            @media (max-width: 768px){
+                display: flex;
+                flex-direction: column;
+            }
 
             span:first-child h3{
                 margin: 0;
@@ -28,6 +38,10 @@ export const Section = styled.section`
                 font-size: 48px;
                 margin: 0;
                 white-space: nowrap;
+
+                @media (max-width: 768px){
+                font-size: 2.2rem;
+                }
             }
 
             .iconUser{
@@ -40,6 +54,12 @@ export const Section = styled.section`
             display: flex;
             flex-direction: column;
             margin-top: -40px;
+
+            @media (max-width: 768px){
+                margin-top: 30px;
+                display: flex;
+                margin-left: 22px;
+            }
 
             .infoUser{
                 display: flex;
@@ -85,9 +105,10 @@ export const ContainerCards = styled.section`
     margin: 30px auto;
     margin-top: -100px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 22px;
-
+    
     .load{
         display: flex;
         align-items: center;
