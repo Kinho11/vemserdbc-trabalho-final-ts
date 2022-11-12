@@ -21,11 +21,34 @@ export const CardContainer = styled.section`
             .linkRepo{
                 text-decoration: none;
                 color: white;
+                position: relative;
 
                 &:hover{
                     font-size: 2.3rem;
-                    transition: .3s;
+                    transition: .7s;
                 }
+
+                &:hover::after{
+                    opacity: 1;
+                    pointer-events: all;
+                }
+                
+                &::after{
+                    transition: .4s;
+                    pointer-events: none;
+                    white-space: nowrap;
+                    content: 'Visite o repositório';
+                    background-color: #474d7a;
+                    padding: 3px 4px;
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    opacity: 0;
+                    position: absolute;
+                    top: 10px;
+                    margin-left: 5px;
+                }
+
             }
         }
 
