@@ -27,6 +27,7 @@ export const Section = styled.section`
                 font-weight: 700;
                 font-size: 48px;
                 margin: 0;
+                white-space: nowrap;
             }
 
             .iconUser{
@@ -44,6 +45,10 @@ export const Section = styled.section`
                 display: flex;
                 align-items: center;
                 gap: 8px;
+
+                .bio{
+                    max-width: 420px;
+                }
             }
 
             .infoUserSeguidores{
@@ -54,6 +59,10 @@ export const Section = styled.section`
                     align-items: center;
                     gap: 8px;
                 }
+            }
+
+            .icone{
+                font-size: 1.3rem;
             }
         }
         

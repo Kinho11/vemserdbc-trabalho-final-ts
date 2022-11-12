@@ -4,7 +4,7 @@ export const CardContainer = styled.section`
 
     .cards{
         width: 250px;
-        max-height: 350px ;
+        height: 250px ;
         display: flex;
         flex-direction: column;
         align-items: center;

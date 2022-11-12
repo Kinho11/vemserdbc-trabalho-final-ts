@@ -9,6 +9,7 @@ import {FaUserPlus} from 'react-icons/fa'
 import { CardRepositorio } from '../../components/CardRepositorio/CardRepositorio'
 import { useParams } from 'react-router-dom'
 
+
 const API = {
   url: 'https://api.github.com/users/',
   clientId: 'ca96ffe8ec2af85ec884',
@@ -40,9 +41,12 @@ export const Profile = () => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
+      if(!data){
+        // console.log(data)
+      }
       setUser(data)
     } catch (error) {
-      console.log(error)
+      alert('Usuário não exite!')
     }
   }
 
@@ -61,8 +65,8 @@ export const Profile = () => {
   }, [])
 
   useEffect(() => {
-    console.log(repositorios)
-    console.log(user)
+    // console.log(repositorios)
+    // console.log(user)
   }, [repositorios, user])
 
   return (
@@ -82,23 +86,23 @@ export const Profile = () => {
             <div className='informacoes'>
 
               <div className='infoUser'>
-                <i><MdOutlineDescription/></i>
-                <p>{user?.bio}</p>
+                <i className='icone'><MdOutlineDescription/></i>
+                <p className='bio'>{user?.bio}</p>
               </div>
 
               <div className='infoUser'>
-                <i><HiOutlineLocationMarker/></i>
+                <i className='icone'><HiOutlineLocationMarker/></i>
                 <p>{user?.location}</p>
               </div>
 
               <div className='infoUserSeguidores'>
                 <div>
-                  <i><FiUserPlus/></i>
+                  <i className='icone'><FiUserPlus/></i>
                   <p>{user?.followers} Seguidores</p>
                 </div>
 
                 <div>
-                  <i><FaUserPlus/></i>
+                  <i className='icone'><FaUserPlus/></i>
                   <p>{user?.following} Seguindo</p>
                 </div>
               </div>
