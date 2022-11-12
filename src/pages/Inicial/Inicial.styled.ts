@@ -60,12 +60,17 @@ export const InicialContainer = styled.section`
       border-radius: 5px;
       border: none;
       background-color: #68E7E7;
-      cursor: pointer;
       transition: 0.3s;
-
+      
       &:hover {
-        opacity: 0.7;
-        transition: 0.3s;
+        filter: brightness(.8);
+        transition: .3s;
+        cursor: pointer;
+      }
+
+      &:disabled{
+        cursor: auto;
+        background-color:#256b6b;
       }
 
       i {

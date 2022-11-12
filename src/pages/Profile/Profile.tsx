@@ -41,12 +41,9 @@ export const Profile = () => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
-      if(!data){
-        // console.log(data)
-      }
       setUser(data)
     } catch (error) {
-      alert('Usuário não exite!')
+      console.log(error)
     }
   }
 
@@ -92,7 +89,8 @@ export const Profile = () => {
 
               <div className='infoUser'>
                 <i className='icone'><HiOutlineLocationMarker/></i>
-                <p>{user?.location}</p>
+                  {!user?.location && <p>Sem localização</p>}
+                  {user?.location && <p>{user?.location}</p>}
               </div>
 
               <div className='infoUserSeguidores'>

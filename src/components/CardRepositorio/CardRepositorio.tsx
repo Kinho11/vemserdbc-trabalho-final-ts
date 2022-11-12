@@ -18,7 +18,7 @@ export const CardRepositorio: React.FC<Tprops>= ({repoNome, repoDescricao, repoL
         <CardContainer>
             <div className='cards'>
                 <span className='icone'>
-                    <a href={repoLink} rel="noreferrer" target='_blank'><i><BsFolder2Open/></i></a>
+                    <a className='linkRepo' href={repoLink} rel="noreferrer" target='_blank'><i><BsFolder2Open/></i></a>
                     <i><FiGithub/></i>
                 </span>
 

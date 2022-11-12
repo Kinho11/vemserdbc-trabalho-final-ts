@@ -17,6 +17,16 @@ export const CardContainer = styled.section`
             width: 250px;
             display: flex;
             justify-content: space-between;
+
+            .linkRepo{
+                text-decoration: none;
+                color: white;
+
+                &:hover{
+                    font-size: 2.3rem;
+                    transition: .3s;
+                }
+            }
         }
 
         .infoRepo{
