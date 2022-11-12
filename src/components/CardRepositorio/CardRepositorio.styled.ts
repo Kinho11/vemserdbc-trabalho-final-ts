@@ -31,8 +31,10 @@ export const CardContainer = styled.section`
 
         .infoRepo{
             max-width: 200px;
+            height: 250px ;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             word-wrap: break-word;
             text-align: center;
         }

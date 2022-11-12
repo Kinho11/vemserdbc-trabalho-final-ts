@@ -43,7 +43,7 @@ export const Profile = () => {
       const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
       setUser(data)
     } catch (error) {
-      console.log(error)
+      alert('Usuário não existe!')
     }
   }
 
@@ -63,7 +63,7 @@ export const Profile = () => {
 
   useEffect(() => {
     // console.log(repositorios)
-    // console.log(user)
+    console.log(user)
   }, [repositorios, user])
 
   return (
