@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Section,ContainerCards } from './Profile.styled'
 
+import loading from '../../assets/loading.gif'
 import {MdOutlineDescription} from 'react-icons/md'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {FiUserPlus} from 'react-icons/fi'
@@ -35,6 +36,8 @@ type TRepos = {
 export const Profile = () => {
   const { username } = useParams<string>()
   const [user, setUser] = useState<TUser>()
+  const [load, setLoad] = useState(false)
+
   const [repositorios, setRepositorios] = useState<TRepos[]>()
   const navigate = useNavigate()
 
@@ -60,6 +63,12 @@ export const Profile = () => {
     getUser()
     getRepositorios()
   }, [])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoad(true)
+    },800)
+  },[])
 
   return (
     <>
@@ -99,9 +108,9 @@ export const Profile = () => {
         <h1>Repositórios</h1>
       </Section>
       <ContainerCards>
-        {repositorios?.map((repositorio) => (
+        {load ? (repositorios?.map((repositorio) => (
           <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url}/>
-        ))}
+        ))):<img className='load' src={loading} alt='load'/>}
       </ContainerCards>
     </>
   )
