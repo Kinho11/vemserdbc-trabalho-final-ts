@@ -7,8 +7,7 @@ import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {FiUserPlus} from 'react-icons/fi'
 import {FaUserPlus} from 'react-icons/fa'
 import { CardRepositorio } from '../../components/CardRepositorio/CardRepositorio'
-import { useParams } from 'react-router-dom'
-
+import { useParams, useNavigate } from 'react-router-dom'
 
 const API = {
   url: 'https://api.github.com/users/',
@@ -37,13 +36,14 @@ export const Profile = () => {
   const { username } = useParams<string>()
   const [user, setUser] = useState<TUser>()
   const [repositorios, setRepositorios] = useState<TRepos[]>()
+  const navigate = useNavigate()
 
   const getUser = async () => {
     try {
       const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
       setUser(data)
     } catch (error) {
-      alert('Usuário não existe!')
+      navigate('/perfil/notfound')
     }
   }
 
@@ -52,7 +52,7 @@ export const Profile = () => {
       const { data } = await axios.get(`${API.url}${username}/repos?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
       setRepositorios(data)
     } catch (error) {
-      console.log(error)
+      navigate('/perfil/notfound')
     }
   }
 
@@ -60,11 +60,6 @@ export const Profile = () => {
     getUser()
     getRepositorios()
   }, [])
-
-  useEffect(() => {
-    // console.log(repositorios)
-    console.log(user)
-  }, [repositorios, user])
 
   return (
     <>
@@ -79,35 +74,28 @@ export const Profile = () => {
               <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
             </span>
           </div>
-
-            <div className='informacoes'>
-
-              <div className='infoUser'>
-                <i className='icone'><MdOutlineDescription/></i>
-                <p className='bio'>{user?.bio}</p>
-              </div>
-
-              <div className='infoUser'>
-                <i className='icone'><HiOutlineLocationMarker/></i>
-                  {!user?.location && <p>Sem localização</p>}
-                  {user?.location && <p>{user?.location}</p>}
-              </div>
-
-              <div className='infoUserSeguidores'>
-                <div>
-                  <i className='icone'><FiUserPlus/></i>
-                  <p>{user?.followers} Seguidores</p>
-                </div>
-
-                <div>
-                  <i className='icone'><FaUserPlus/></i>
-                  <p>{user?.following} Seguindo</p>
-                </div>
-              </div>
-
+          <div className='informacoes'>
+            <div className='infoUser'>
+              <i className='icone'><MdOutlineDescription/></i>
+              <p className='bio'>{user?.bio}</p>
             </div>
+            <div className='infoUser'>
+              <i className='icone'><HiOutlineLocationMarker/></i>
+                {!user?.location && <p>Sem localização</p>}
+                {user?.location && <p>{user?.location}</p>}
+            </div>
+            <div className='infoUserSeguidores'>
+              <div>
+                <i className='icone'><FiUserPlus/></i>
+                <p>{user?.followers} Seguidores</p>
+              </div>
+              <div>
+                <i className='icone'><FaUserPlus/></i>
+                <p>{user?.following} Seguindo</p>
+              </div>
+            </div>
+          </div>
         </div>
-
         <h1>Repositórios</h1>
       </Section>
       <ContainerCards>

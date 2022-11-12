@@ -30,7 +30,7 @@ export const CardContainer = styled.section`
         }
 
         .infoRepo{
-            max-width: 200px;
+            max-width: 250px;
             height: 250px ;
             display: flex;
             flex-direction: column;
