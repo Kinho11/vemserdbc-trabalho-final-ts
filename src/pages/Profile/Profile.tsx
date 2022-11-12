@@ -1,16 +1,70 @@
-import React from 'react'
-
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import { Section,ContainerCards } from './Profile.styled'
 
-import {BiUser} from 'react-icons/bi'
 import {MdOutlineDescription} from 'react-icons/md'
 import {HiOutlineLocationMarker} from 'react-icons/hi'
 import {FiUserPlus} from 'react-icons/fi'
 import {FaUserPlus} from 'react-icons/fa'
 import { CardRepositorio } from '../../components/CardRepositorio/CardRepositorio'
+import { useParams } from 'react-router-dom'
 
+const API = {
+  url: 'https://api.github.com/users/',
+  clientId: 'ca96ffe8ec2af85ec884',
+  clientSecret: 'd14a35207f88b4d3b34871cfecddb704a9897976'
+}
+
+type TUser = {
+  name: string,
+  bio: string,
+  location: string,
+  followers: number,
+  following: number,
+  avatar_url: string
+}
+
+type TRepos = {
+  name: string,
+  description: string,
+  language: string,
+  id: number,
+  html_url: string
+}
 
 export const Profile = () => {
+  const { username } = useParams<string>()
+  const [user, setUser] = useState<TUser>()
+  const [repositorios, setRepositorios] = useState<TRepos[]>()
+
+  const getUser = async () => {
+    try {
+      const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
+      setUser(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getRepositorios = async () => {
+    try {
+      const { data } = await axios.get(`${API.url}${username}/repos?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
+      setRepositorios(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getUser()
+    getRepositorios()
+  }, [])
+
+  useEffect(() => {
+    console.log(repositorios)
+    console.log(user)
+  }, [repositorios, user])
+
   return (
     <>
       <Section>
@@ -18,10 +72,10 @@ export const Profile = () => {
           <div className='nameUser'>
             <span>
               <h3>Nome:</h3>
-              <h1 className='nome'>Nome do usuário</h1>
+              <h1 className='nome'>{user?.name}</h1>
             </span>
             <span>
-              <i className='iconUser'><BiUser/></i>
+              <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
             </span>
           </div>
 
@@ -29,23 +83,23 @@ export const Profile = () => {
 
               <div className='infoUser'>
                 <i><MdOutlineDescription/></i>
-                <p>Descrição do perfil</p>
+                <p>{user?.bio}</p>
               </div>
 
               <div className='infoUser'>
                 <i><HiOutlineLocationMarker/></i>
-                <p>Localização</p>
+                <p>{user?.location}</p>
               </div>
 
               <div className='infoUserSeguidores'>
                 <div>
                   <i><FiUserPlus/></i>
-                  <p>XX Seguidores</p>
+                  <p>{user?.followers} Seguidores</p>
                 </div>
 
                 <div>
                   <i><FaUserPlus/></i>
-                  <p>XX Seguindo</p>
+                  <p>{user?.following} Seguindo</p>
                 </div>
               </div>
 
@@ -55,7 +109,9 @@ export const Profile = () => {
         <h1>Repositórios</h1>
       </Section>
       <ContainerCards>
-        <CardRepositorio repoNome='Marcus' repoDescricao='Meu site' repoLinguagens='Javascript'/>
+        {repositorios?.map((repositorio) => (
+          <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url}/>
+        ))}
       </ContainerCards>
     </>
   )

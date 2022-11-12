@@ -13,7 +13,7 @@ export const Section = styled.section`
         .nameUser{
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 20px;
 
             span:first-child h3{
@@ -30,7 +30,8 @@ export const Section = styled.section`
             }
 
             .iconUser{
-                font-size: 10rem;
+                width: 150px;
+                border-radius: 100%;
             }
         }
 

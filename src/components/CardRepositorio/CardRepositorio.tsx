@@ -6,27 +6,30 @@ import {BsFolder2Open} from 'react-icons/bs'
 import {FiGithub} from 'react-icons/fi'
 
 type Tprops = {
-    repoNome?: string,
-    repoDescricao?: string,
-    repoLinguagens?: string
+    repoNome: string,
+    repoDescricao: string,
+    repoLinguagens: string,
+    repoLink: string
 }
 
-export const CardRepositorio: React.FC<Tprops>= ({repoNome, repoDescricao, repoLinguagens}) => {
+export const CardRepositorio: React.FC<Tprops>= ({repoNome, repoDescricao, repoLinguagens, repoLink}) => {
   return (
     <>
         <CardContainer>
             <div className='cards'>
                 <span className='icone'>
-                    <i><BsFolder2Open/></i>
+                    <a href={repoLink} rel="noreferrer" target='_blank'><i><BsFolder2Open/></i></a>
                     <i><FiGithub/></i>
                 </span>
 
                 <div className='infoRepo'>
                     <p>{repoNome}</p>
 
-                    <p>{repoDescricao}</p>
+                    {!repoDescricao && <p>Repositório sem Descrição</p>}
+                    {repoDescricao && <p>{repoDescricao}</p>}
 
-                    <p>{repoLinguagens}</p>
+                    {!repoLinguagens && <p>Repositório sem Linguagem</p>}
+                    {repoLinguagens && <p>{repoLinguagens}</p>}
                 </div>
 
             </div>
