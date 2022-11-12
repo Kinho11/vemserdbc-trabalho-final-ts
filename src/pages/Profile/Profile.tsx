@@ -36,7 +36,7 @@ type TRepos = {
 export const Profile = () => {
   const { username } = useParams<string>()
   const [user, setUser] = useState<TUser>()
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState<boolean>(false)
 
   const [repositorios, setRepositorios] = useState<TRepos[]>()
   const navigate = useNavigate()
