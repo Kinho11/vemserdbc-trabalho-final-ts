@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Section,ContainerCards, Load } from './Profile.styled'
+import { Section,ContainerCards, LoadContainer } from './Profile.styled'
 
 import loading from '../../assets/loading.gif'
 import {MdOutlineDescription} from 'react-icons/md'
@@ -72,7 +72,6 @@ export const Profile = () => {
 
   return (
     <>
-      <Load>
         {load ? 
           <div>
             <Section>
@@ -116,8 +115,7 @@ export const Profile = () => {
               ))}
             </ContainerCards>
           </div>
-        : <img className='load' src={loading} alt='load'/>}
-      </Load>
+        : <LoadContainer><img className='load' src={loading} alt='load'/></LoadContainer>}
     </>
   )
 }

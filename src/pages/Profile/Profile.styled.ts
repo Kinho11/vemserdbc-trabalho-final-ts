@@ -113,11 +113,15 @@ export const ContainerCards = styled.section`
 
 `
 
-export const Load = styled.div`
+export const LoadContainer = styled.div`
+    width: 100%;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    .load{
+    justify-content: center;
+
+    img.load{
         width: 150px;
     }
+    
 `
