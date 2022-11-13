@@ -4,6 +4,7 @@ export const Section = styled.section`
     max-width: 1000px;
     margin: 148px auto;
     color: white;
+    
 
     .container{
         max-width:580px ;
@@ -116,7 +117,6 @@ export const Load = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
     .load{
         width: 150px;
     }
