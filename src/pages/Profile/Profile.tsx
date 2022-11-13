@@ -44,7 +44,6 @@ export const Profile = () => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(`${API.url}${username}?client_id=${API.clientId}?client_secret=${API.clientSecret}`)
-      console.log(data)
       setUser(data)
     } catch (error) {
       navigate('/perfil/notfound')
