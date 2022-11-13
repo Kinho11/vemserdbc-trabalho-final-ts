@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Section,ContainerCards } from './Profile.styled'
+import { Section,ContainerCards, Load } from './Profile.styled'
 
 import loading from '../../assets/loading.gif'
 import {MdOutlineDescription} from 'react-icons/md'
@@ -73,46 +73,52 @@ export const Profile = () => {
 
   return (
     <>
-      <Section>
-        <div className='container'>
-          <div className='nameUser'>
-            <span>
-              <h3>Nome:</h3>
-              <h1 className='nome'>{user?.name}</h1>
-            </span>
-            <span>
-              <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
-            </span>
+      <Load>
+        {load ? 
+          <div>
+            <Section>
+                <div className='container'>
+                  <div className='nameUser'>
+                    <span>
+                      <h3>Nome:</h3>
+                      <h1 className='nome'>{user?.name}</h1>
+                    </span>
+                    <span>
+                      <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
+                    </span>
+                  </div>
+                  <div className='informacoes'>
+                    <div className='infoUser'>
+                      <i className='icone'><MdOutlineDescription/></i>
+                      <p className='bio'>{user?.bio}</p>
+                    </div>
+                    <div className='infoUser'>
+                      <i className='icone'><HiOutlineLocationMarker/></i>
+                        {!user?.location && <p>Sem localização</p>}
+                        {user?.location && <p>{user?.location}</p>}
+                    </div>
+                    <div className='infoUserSeguidores'>
+                      <div>
+                        <i className='icone'><FiUserPlus/></i>
+                        <p>{user?.followers} Seguidores</p>
+                      </div>
+                      <div>
+                        <i className='icone'><FaUserPlus/></i>
+                        <p>{user?.following} Seguindo</p>
+                      </div>
+                    </div>
+                  </div>
+                  <h1>Repositórios</h1>
+                </div>
+            </Section>
+            <ContainerCards>
+              {repositorios?.map((repositorio) => (
+                <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url}/>
+              ))}
+            </ContainerCards>
           </div>
-          <div className='informacoes'>
-            <div className='infoUser'>
-              <i className='icone'><MdOutlineDescription/></i>
-              <p className='bio'>{user?.bio}</p>
-            </div>
-            <div className='infoUser'>
-              <i className='icone'><HiOutlineLocationMarker/></i>
-                {!user?.location && <p>Sem localização</p>}
-                {user?.location && <p>{user?.location}</p>}
-            </div>
-            <div className='infoUserSeguidores'>
-              <div>
-                <i className='icone'><FiUserPlus/></i>
-                <p>{user?.followers} Seguidores</p>
-              </div>
-              <div>
-                <i className='icone'><FaUserPlus/></i>
-                <p>{user?.following} Seguindo</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h1>Repositórios</h1>
-      </Section>
-      <ContainerCards>
-        {load ? (repositorios?.map((repositorio) => (
-          <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url}/>
-        ))):<img className='load' src={loading} alt='load'/>}
-      </ContainerCards>
+        : <img className='load' src={loading} alt='load'/>}
+      </Load>
     </>
   )
 }

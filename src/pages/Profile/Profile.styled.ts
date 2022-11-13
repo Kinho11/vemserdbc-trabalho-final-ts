@@ -109,11 +109,15 @@ export const ContainerCards = styled.section`
     flex-wrap: wrap;
     gap: 22px;
     
+
+`
+
+export const Load = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     .load{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
         width: 150px;
     }
 `
