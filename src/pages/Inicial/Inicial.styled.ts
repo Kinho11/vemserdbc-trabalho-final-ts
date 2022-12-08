@@ -8,7 +8,7 @@ export const InicialContainer = styled.section`
   justify-content: center;
 
   .infos {
-    max-width: 430px;
+    max-width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;

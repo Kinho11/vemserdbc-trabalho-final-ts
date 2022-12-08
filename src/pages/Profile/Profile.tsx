@@ -115,6 +115,7 @@ export const Profile = () => {
             {repositorios?.map((repositorio) => (
               <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url} />
             ))}
+            {!repositorios?.length && <h1 style={{ color: "#fff", textAlign: "center" }}>Nenhum repositório foi encontrado!</h1>}
           </ContainerCards>
         </div>
       }

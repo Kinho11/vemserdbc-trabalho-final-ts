@@ -18,9 +18,10 @@ export const Section = styled.section`
       justify-content: space-between;
 
       @media (max-width: 768px){
-        display: flex;
-        align-items: center;
-        margin: 0 22px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 22px;
       }
 
       span:first-child h3{
@@ -38,6 +39,10 @@ export const Section = styled.section`
 
         @media (max-width: 768px){
           font-size: 2.2rem;
+          max-width: 90%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
 
