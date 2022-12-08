@@ -47,6 +47,7 @@ export const Section = styled.section`
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: start;
 
         @media (max-width: 768px){
           font-size: 2rem;
