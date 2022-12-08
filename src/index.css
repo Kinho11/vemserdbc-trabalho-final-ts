@@ -5,13 +5,24 @@
 }
 
 body {
+  box-sizing: border-box;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1C203B;
 }
 
+body::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 20px;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 18px;
+  background-color: #68E7E7;
+  border-radius: 20px;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

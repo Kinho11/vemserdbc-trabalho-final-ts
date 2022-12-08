@@ -1,4 +1,5 @@
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
+
 import { Inicial } from './pages/Inicial/Inicial';
 import { Profile } from './pages/Profile/Profile';
 import ProfileNotFound from './pages/ProfileNotFound/ProfileNotFound';
