@@ -25,6 +25,8 @@ export const Section = styled.section`
       }
 
       span {
+        width: 70%;
+        
         @media (max-width: 768px){
           width: 100%;
         }
@@ -41,7 +43,10 @@ export const Section = styled.section`
         font-weight: 700;
         font-size: 48px;
         margin: 0;
+        max-width: 100%;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         @media (max-width: 768px){
           font-size: 2rem;
