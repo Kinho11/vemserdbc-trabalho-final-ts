@@ -24,6 +24,12 @@ export const Section = styled.section`
         margin-left: 22px;
       }
 
+      span {
+        @media (max-width: 768px){
+          width: 100%;
+        }
+      }
+
       span:first-child h3{
         margin: 0;
         font-size: 14px;
@@ -38,11 +44,12 @@ export const Section = styled.section`
         white-space: nowrap;
 
         @media (max-width: 768px){
-          font-size: 2.2rem;
-          max-width: 90%;
+          font-size: 2rem;
+          max-width: 95%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-align: start;
         }
       }
 
