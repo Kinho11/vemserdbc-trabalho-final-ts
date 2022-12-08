@@ -1,14 +1,19 @@
-import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Section,ContainerCards, Load } from './Profile.styled'
 
-import loading from '../../assets/loading.gif'
-import {MdOutlineDescription} from 'react-icons/md'
-import {HiOutlineLocationMarker} from 'react-icons/hi'
-import {FiUserPlus} from 'react-icons/fi'
-import {FaUserPlus} from 'react-icons/fa'
-import { CardRepositorio } from '../../components/CardRepositorio/CardRepositorio'
 import { useParams, useNavigate } from 'react-router-dom'
+
+import axios from 'axios'
+
+import { Section, ContainerCards, Load } from './Profile.styled'
+
+import { CardRepositorio } from '../../components/CardRepositorio/CardRepositorio'
+
+import { ImpulseSpinner } from 'react-spinners-kit'
+
+import { MdOutlineDescription } from 'react-icons/md'
+import { HiOutlineLocationMarker } from 'react-icons/hi'
+import { FiUserPlus } from 'react-icons/fi'
+import { FaUserPlus } from 'react-icons/fa'
 
 const API = {
   url: 'https://api.github.com/users/',
@@ -36,7 +41,7 @@ type TRepos = {
 export const Profile = () => {
   const { username } = useParams<string>()
   const [user, setUser] = useState<TUser>()
-  const [load, setLoad] = useState<boolean>(false)
+  const [load, setLoad] = useState<boolean>(true)
 
   const [repositorios, setRepositorios] = useState<TRepos[]>()
   const navigate = useNavigate()
@@ -62,62 +67,58 @@ export const Profile = () => {
   useEffect(() => {
     getUser()
     getRepositorios()
+    setTimeout(() => {
+      setLoad(false)
+    }, 500)
   }, [])
-
-  useEffect(()=>{
-    setTimeout(()=>{
-      setLoad(true)
-    },800)
-  },[])
 
   return (
     <>
-      <Load>
-        {load ? 
-          <div>
-            <Section>
-                <div className='container'>
-                  <div className='nameUser'>
-                    <span>
-                      <h3>Nome:</h3>
-                      <h1 className='nome'>{user?.name}</h1>
-                    </span>
-                    <span>
-                      <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
-                    </span>
-                  </div>
-                  <div className='informacoes'>
-                    <div className='infoUser'>
-                      <i className='icone'><MdOutlineDescription/></i>
-                      <p className='bio'>{user?.bio}</p>
-                    </div>
-                    <div className='infoUser'>
-                      <i className='icone'><HiOutlineLocationMarker/></i>
-                        {!user?.location && <p>Sem localização</p>}
-                        {user?.location && <p>{user?.location}</p>}
-                    </div>
-                    <div className='infoUserSeguidores'>
-                      <div>
-                        <i className='icone'><FiUserPlus/></i>
-                        <p>{user?.followers} Seguidores</p>
-                      </div>
-                      <div>
-                        <i className='icone'><FaUserPlus/></i>
-                        <p>{user?.following} Seguindo</p>
-                      </div>
-                    </div>
-                  </div>
-                  <h1>Repositórios</h1>
+      {!load &&
+        <div>
+          <Section>
+            <div className='container'>
+              <div className='nameUser'>
+                <span>
+                  <h3>Nome:</h3>
+                  {!user?.name && <h1 className='nome'>{username}</h1>}
+                  {user?.name && <h1 className='nome'>{user?.name}</h1>}
+                </span>
+                <img className='iconUser' src={user?.avatar_url} alt="User Avatar" />
+              </div>
+              <div className='informacoes'>
+                <div className='infoUser'>
+                  <i className='icone'><MdOutlineDescription/></i>
+                  {!user?.bio && <p className='bio'>Sem descrição</p>}
+                  {user?.bio && <p className='bio'>{user?.bio}</p>}
                 </div>
-            </Section>
-            <ContainerCards>
-              {repositorios?.map((repositorio) => (
-                <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url}/>
-              ))}
-            </ContainerCards>
-          </div>
-        : <img className='load' src={loading} alt='load'/>}
-      </Load>
+                <div className='infoUser'>
+                  <i className='icone'><HiOutlineLocationMarker/></i>
+                  {!user?.location && <p>Sem localização</p>}
+                  {user?.location && <p>{user?.location}</p>}
+                </div>
+                <div className='infoUserSeguidores'>
+                  <div>
+                    <i className='icone'><FiUserPlus/></i>
+                    <p>{user?.followers} Seguidores</p>
+                  </div>
+                  <div>
+                    <i className='icone'><FaUserPlus/></i>
+                    <p>{user?.following} Seguindo</p>
+                  </div>
+                </div>
+              </div>
+              <h1>Repositórios</h1>
+            </div>
+          </Section>
+          <ContainerCards>
+            {repositorios?.map((repositorio) => (
+              <CardRepositorio key={repositorio.id} repoNome={repositorio.name} repoDescricao={repositorio.description} repoLinguagens={repositorio.language} repoLink={repositorio.html_url} />
+            ))}
+          </ContainerCards>
+        </div>
+      }
+      {load && <Load><ImpulseSpinner size={100} frontColor="#68E7E7" loading={load} /></Load>}
     </>
   )
 }
