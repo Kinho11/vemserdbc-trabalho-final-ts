@@ -69,7 +69,7 @@ export const InicialContainer = styled.section`
       }
 
       &:disabled{
-        cursor: auto;
+        cursor: not-allowed;
         background-color:#256b6b;
       }
 
